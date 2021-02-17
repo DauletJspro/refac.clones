@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserConfirmDocumentsTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUserConfirmDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_confirm_documents', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->boolean('is_active')->default(false);
+            $table->string('model_type');
+            $table->integer('model_id');
+            $table->string('path');
             $table->softDeletes();
             $table->timestamps();
             $table->index('created_at');
@@ -30,6 +31,6 @@ class CreateUserConfirmDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_confirm_documents');
+        Schema::dropIfExists('images');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserConfirmDocumentsTable extends Migration
+class CreateRepresentativesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateUserConfirmDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_confirm_documents', function (Blueprint $table) {
+        Schema::create('representatives', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('city_id')->constrained('cities');
             $table->foreignId('user_id')->constrained('users');
-            $table->boolean('is_active')->default(false);
+            $table->string('address')->nullable();
+            $table->integer('number')->nullable();
+            $table->boolean('is_active')->default(0);
             $table->softDeletes();
             $table->timestamps();
             $table->index('created_at');
@@ -30,6 +33,6 @@ class CreateUserConfirmDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_confirm_documents');
+        Schema::dropIfExists('representatives');
     }
 }

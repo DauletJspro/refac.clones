@@ -105,5 +105,12 @@ class User extends Authenticatable
         return $this->belongsTo(UserConfirmDocument::class);
     }
 
+    public function representative(){
+        return $this->belongsTo(Representative::class);
+    }
+
+    public function product(){
+        return $this->belongsToMany(Product::class, 'user_baskets');
+    }
 
 }

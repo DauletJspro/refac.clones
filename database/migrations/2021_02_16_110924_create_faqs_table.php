@@ -15,7 +15,7 @@ class CreateFaqsTable extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('status+id')->constrained('faq_status');
+            $table->foreignId('status_id')->constrained('faq_status');
             $table->string('question');
             $table->string('answer');
             $table->string('order');
