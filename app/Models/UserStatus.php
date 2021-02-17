@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserStatus extends Model
 {
     use SoftDeletes;
+
+    public function userStatus(){
+        return $this->hasMany(User::class,'status_id');
+    }
+
+    public function userGapStatus(){
+        return $this->hasMany(User::class,'gap_status_id');
+    }
+
+    public function packet(){
+        return $this->hasMany(Packet::class);
+    }
 }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class NewsImage extends Model
 {
     use SoftDeletes;
+
+    public function news(){
+        return $this->belongsTo(News::class);
+    }
 }

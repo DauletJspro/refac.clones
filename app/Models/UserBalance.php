@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserBalance extends Model
 {
     use SoftDeletes;
+
 }

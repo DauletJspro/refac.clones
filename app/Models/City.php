@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends Model
 {
     use SoftDeletes;
+
+    public function region(){
+        return $this->belongsTo(Region::class);
+    }
+
+    public function userInfo(){
+        return $this->hasMany(UserInfo::class);
+    }
 }
