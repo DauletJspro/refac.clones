@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Group extends Model
+class UserGroup extends Model
 {
     use SoftDeletes;
-
-    public function userGroup(){
-        return $this->belongsTo(User::class,'user_groups');
-    }
 }

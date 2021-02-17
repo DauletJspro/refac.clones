@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Group extends Model
+class UserConfirmDocument extends Model
 {
     use SoftDeletes;
 
-    public function userGroup(){
-        return $this->belongsTo(User::class,'user_groups');
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

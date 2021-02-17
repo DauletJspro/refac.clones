@@ -65,6 +65,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Operation::class,'user_operation','recipient_id');
     }
 
+    //  Связи для операции пользователи с документами
+
+    public function userGroup(){
+        return $this->belongsTo(Group::class,'user_groups');
+    }
+
+    public function document(){
+        return $this->belongsToMany(DocumentType::class,'user_document');
+    }
+
     // Связи
 
     public function comments(){
@@ -90,5 +100,10 @@ class User extends Authenticatable
     public function guides(){
         return $this->hasMany(Guide::class);
     }
+
+    public function userConfirmDocument(){
+        return $this->belongsTo(UserConfirmDocument::class);
+    }
+
 
 }
