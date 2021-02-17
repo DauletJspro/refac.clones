@@ -16,4 +16,8 @@ class City extends Model
     public function userInfo(){
         return $this->hasMany(UserInfo::class);
     }
+
+    public function representative(){
+        return $this->belongsTo(Representative::class);
+    }
 }

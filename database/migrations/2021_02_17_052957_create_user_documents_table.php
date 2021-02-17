@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaqsTable extends Migration
+class CreateUserDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateFaqsTable extends Migration
      */
     public function up()
     {
-        Schema::create('faqs', function (Blueprint $table) {
+        Schema::create('user_document', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('status_id')->constrained('faq_status');
-            $table->string('question');
-            $table->string('answer');
-            $table->string('order');
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('document_id')->constrained('document_types');
+            $table->string('document_format')->nullable();
+            $table->string('document_path')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->index('created_at');
@@ -33,6 +32,6 @@ class CreateFaqsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('user_document');
     }
 }
