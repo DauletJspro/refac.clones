@@ -16,10 +16,17 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique();
+            $table->boolean('is_active')->default(true);
+            $table->timestamp('activated_date')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('image')->nullable();
+            $table->string('hash_email')->nullable();
             $table->rememberToken();
+            $table->integer('parent_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -31,6 +38,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+//        Schema::table('users', function (Blueprint $table) {
+//            $table->dropForeign('users_parent_id_foreign');
+//            $table->dropColumn('parent_id');
+//        });
         Schema::dropIfExists('users');
     }
 }
