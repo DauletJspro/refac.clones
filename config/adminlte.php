@@ -237,7 +237,7 @@ return [
         ],
         [
             'text' => 'Информация',
-            'url' => route('home'),
+            'url' => 'admin/home',
             'icon' => 'fa fa-fw fa-info',
         ],
         [

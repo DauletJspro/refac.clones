@@ -19,5 +19,5 @@ Auth::routes();
 
 Route::redirect('/', 'login');
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home.index');
 });
