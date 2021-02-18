@@ -16,7 +16,7 @@ class CreateUserInfosTable extends Migration
         Schema::create('user_info', function (Blueprint $table) {
             $table->id();
             $table->string('last_name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->boolean('is_speaker')->nullable();
             $table->boolean('is_director_office')->default(false);
             $table->boolean('is_document_verified')->default(false);

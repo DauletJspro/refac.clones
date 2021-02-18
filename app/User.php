@@ -26,7 +26,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username',
+        'name',
+        'email',
+        'password',
+        'username',
+        'is_active',
+        'activated_date',
+        'inviter_id',
     ];
 
     /**
@@ -59,6 +65,12 @@ class User extends Authenticatable
     }
 
     //  Связи для дополнительный таьлицы для партнеров
+
+    public function info()
+    {
+        return $this->hasOne(UserInfo::class);
+    }
+
     public function userSpeakerInfo()
     {
         return $this->hasMany(UserInfo::class, 'speaker_id');
@@ -111,5 +123,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Guide::class);
     }
+
+    public static function getSpeakers()
+    {
+        return User::join('user_info', 'user_info.user_id', '=', 'users.id')
+            ->where(['user_info.is_speaker' => true])
+            ->get();
+    }
+
+    public static function getOfficeDirectors()
+    {
+        return User::join('user_info', 'user_info.user_id', '=', 'users.id')
+            ->where(['user_info.is_director_office' => true])
+            ->get();
+    }
+
 
 }

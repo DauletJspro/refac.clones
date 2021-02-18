@@ -14,7 +14,7 @@ class CreateForeignsToUserInfo extends Migration
     public function up()
     {
         Schema::table('user_info', function (Blueprint $table) {
-            $table->foreignId('city_id')->after('middle_name')->constrained('cities');
+            $table->foreignId('city_id')->nullable()->after('middle_name')->constrained('cities');
             $table->foreignId('speaker_id')->after('city_id')->constrained('users');
             $table->foreignId('office_director_id')->after('speaker_id')->constrained('users');
             $table->foreignId('office_id')->after('is_director_office')->constrained('offices');
@@ -29,7 +29,6 @@ class CreateForeignsToUserInfo extends Migration
     public function down()
     {
         Schema::table('user_info', function (Blueprint $table) {
-
             $table->dropForeign('user_info_city_id_foreign');
             $table->dropForeign('user_info_speaker_id_foreign');
             $table->dropForeign('user_info_office_director_id_foreign');

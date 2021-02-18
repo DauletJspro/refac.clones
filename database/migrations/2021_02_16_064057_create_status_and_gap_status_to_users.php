@@ -14,8 +14,8 @@ class CreateStatusAndGapStatusToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('status_id')->after('image')->constrained('user_status');
-            $table->foreignId('gap_status_id')->after('status_id')->constrained('user_status');
+            $table->foreignId('status_id')->nullable()->after('image')->constrained('user_status');
+            $table->foreignId('gap_status_id')->nullable()->after('status_id')->constrained('user_status');
         });
     }
 
