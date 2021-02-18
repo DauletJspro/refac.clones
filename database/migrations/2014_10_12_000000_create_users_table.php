@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('hash_email')->nullable();
             $table->rememberToken();
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
