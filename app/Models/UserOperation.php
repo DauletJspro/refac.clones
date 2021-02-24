@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserOperation extends Model
 {
     use SoftDeletes;
+    protected $table = 'user_operation';
 
     public function operation(){
         return $this->belongsTo(Operation::class);

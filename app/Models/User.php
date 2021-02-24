@@ -39,78 +39,111 @@ class User extends Authenticatable
     ];
 
     // Связи  для статуса клиента
-    public function userStatus(){
+    public function userStatus()
+    {
         return $this->belongsTo(UserStatus::class);
     }
 
-    public function userGapStatus(){
+    public function userGapStatus()
+    {
         return $this->belongsTo(UserStatus::class);
     }
 
-   //  Связи для дополнительный таьлицы для партнеров
-   public function userSpeakerInfo(){
+    //  Связи для дополнительный таьлицы для партнеров
+    public function userSpeakerInfo()
+    {
         return $this->hasMany(UserInfo::class, 'speaker_id');
-   }
+    }
 
-   public function userDirectoryInfo(){
+    public function userDirectoryInfo()
+    {
         return $this->hasMany(UserInfo::class, 'office_director_id');
-   }
+    }
 
-   //  Связи для операции пользователи
-   public function operationsAuthor(){
-        return $this->belongsToMany(Operation::class,'user_operation','author_id');
-   }
+    //  Связи для операции пользователи
+    public function operationsAuthor()
+    {
+        return $this->belongsToMany(Operation::class, 'user_operation', 'author_id');
+    }
 
-    public function recepientOperation(){
-        return $this->belongsToMany(Operation::class,'user_operation','recipient_id');
+    public function recepientOperation()
+    {
+        return $this->belongsToMany(Operation::class, 'user_operation', 'recipient_id');
     }
 
     //  Связи для операции пользователи с документами
 
-    public function userGroup(){
-        return $this->belongsTo(Group::class,'user_groups');
+    public function userGroup()
+    {
+        return $this->belongsTo(Group::class, 'user_groups');
     }
 
-    public function document(){
-        return $this->belongsToMany(DocumentType::class,'user_document');
+    public function document()
+    {
+        return $this->belongsToMany(DocumentType::class, 'user_document');
     }
 
     // Связи
 
-    public function comments(){
-        return $this->hasMany(Comment::class,'author_id');
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'author_id');
     }
 
-    public function likes(){
-        return $this->hasMany(Like::class,'author_id');
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'author_id');
     }
 
-    public function reviews(){
-        return $this->hasMany(Review::class,'author_id');
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'author_id');
     }
 
-    public function news(){
-        return $this->hasOne(News::class,'author_id');
+    public function news()
+    {
+        return $this->hasOne(News::class, 'author_id');
     }
 
-    public function favorites(){
+    public function favorites()
+    {
         return $this->hasMany(Favorites::class);
     }
 
-    public function guides(){
+    public function guides()
+    {
         return $this->hasMany(Guide::class);
     }
 
-    public function userConfirmDocument(){
+    public function userConfirmDocument()
+    {
         return $this->belongsTo(UserConfirmDocument::class);
     }
 
-    public function representative(){
+    public function representative()
+    {
         return $this->belongsTo(Representative::class);
     }
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsToMany(Product::class, 'user_baskets');
     }
+
+    public function packet()
+    {
+        return $this->hasManyThrough(Packet::class, UserPacket::class);
+    }
+
+    public function user_packet()
+    {
+        return $this->hasMany(Packet::class);
+    }
+
+    public function balance()
+    {
+        return $this->hasOne(UserBalance::class);
+    }
+
 
 }

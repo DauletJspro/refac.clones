@@ -9,4 +9,6 @@ class UserBalance extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'user_balance';
+
 }

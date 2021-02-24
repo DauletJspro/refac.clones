@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,6 @@ Auth::routes();
 
 Route::redirect('/', 'login');
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-    Route::get('/home', 'HomeController@index')->name('home.index');
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+    Route::post('/home/ajax', [HomeController::class, 'ajax'])->name('home.ajax');
 });

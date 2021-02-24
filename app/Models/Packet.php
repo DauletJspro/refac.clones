@@ -9,7 +9,17 @@ class Packet extends Model
 {
     use SoftDeletes;
 
-    public function userStatus(){
+    const CLASSIC = 1;
+    const PREMIUM = 2;
+    const VIP = 3;
+    const GAP = 4;
+    const GAPTechno = 5;
+    const GAPAuto = 6;
+    const GAPHome = 7;
+
+
+    public function userStatus()
+    {
         return $this->belongsTo(UserStatus::class);
     }
 }

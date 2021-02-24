@@ -9,9 +9,11 @@ class Operation extends Model
 {
     use SoftDeletes;
 
+    const WITHDRAWAL = 1;
+    const ACCRUAL = 2;
 
-
-    public function user(){
-        return $this->belongsToMany(User::class,'user_operation');
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'user_operation');
     }
 }
