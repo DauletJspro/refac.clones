@@ -38,7 +38,7 @@ class User extends Authenticatable
         'is_active',
         'activated_date',
         'inviter_id',
-        'iin'
+        'phone'
     ];
 
     /**
@@ -102,12 +102,14 @@ class User extends Authenticatable
 
     //  Связи для операции пользователи с документами
 
-    public function userGroup(){
-        return $this->belongsTo(Group::class,'user_groups');
+    public function userGroup()
+    {
+        return $this->belongsTo(Group::class, 'user_groups');
     }
 
-    public function document(){
-        return $this->belongsToMany(DocumentType::class,'user_document');
+    public function document()
+    {
+        return $this->belongsToMany(DocumentType::class, 'user_document');
     }
 
     // Связи
@@ -142,11 +144,13 @@ class User extends Authenticatable
         return $this->hasMany(Guide::class);
     }
 
-    public function cash(){
+    public function cash()
+    {
         return $this->hasOne(UserBalance::class);
     }
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsToMany(Product::class, 'user_baskets');
     }
 

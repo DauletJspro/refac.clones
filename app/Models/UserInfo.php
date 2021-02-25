@@ -32,7 +32,7 @@ class   UserInfo extends Model
         'is_male',
         'iban',
         'card_name',
-
+        'social_id'
     ];
 
     protected $hidden = [
@@ -62,7 +62,8 @@ class   UserInfo extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function userGender(){
+    public function userGender()
+    {
         return $this->belongsTo(UserGender::class, 'is_male');
     }
 }

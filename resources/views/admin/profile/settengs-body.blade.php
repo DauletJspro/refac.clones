@@ -2,10 +2,8 @@
     <div class="card">
         <div class="card-header p-2">
             <ul class="nav nav-pills">
-                <li class="nav-item pb-4"><a class="nav-link active"  data-toggle="tab">Настройка проифиля</a></li>
+                <li class="nav-item pb-4"><a class="nav-link active" data-toggle="tab">Настройка проифиля</a></li>
             </ul>
-
-
 
 
             <div class="tab-pane" id="settings">
@@ -54,8 +52,8 @@
                     <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label">ИИН</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputSkills" name="iin"
-                                   value="{{$user->iin}}" placeholder="{{$user->iin}}">
+                            <input type="text" class="form-control" id="inputSkills" name="social_id"
+                                   value="{{$user->info->social_id}}" placeholder="{{$user->info->social_id}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -127,13 +125,13 @@
                     </div>
                 </form>
                 <div class="form-group row">
-                <div class="offset-sm-2 col-sm-10">
-                <form method="POST" action="{{route("profile.password.edit", $user->id )}}">
-                    @method('GET')
-                    @csrf
-                    <button  type="submit" class="btn btn-primary">Изменить пароль</button>
-                </form>
-                </div>
+                    <div class="offset-sm-2 col-sm-10">
+                        <form method="POST" action="{{route("profile.password.edit", $user->id )}}">
+                            @method('GET')
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Изменить пароль</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <!-- /.tab-pane -->
@@ -143,6 +141,7 @@
 </div>
 <script>
     import Chart
+
     export default {
         components: {Chart}
     }

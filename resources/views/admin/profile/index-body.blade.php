@@ -35,7 +35,7 @@
                                     <strong>Телефон:</strong>
                                     <p class="text-muted">{{$user->phone}}</p>
                                     <strong>ИИН:</strong>
-                                    <p class="text-muted"> {{$user->iin}} </p>
+                                    <p class="text-muted"> {{$user->info->social_id}} </p>
                                     <strong>Номер карточки :</strong>
                                     <p class="text-muted">
                                         @if(empty($user->info->card_number))

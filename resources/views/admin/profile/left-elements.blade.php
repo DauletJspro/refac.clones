@@ -76,11 +76,7 @@
             <strong><i class="fas fa-address-card"></i> Статус</strong>
 
             <p class="text-muted">
-                @if($user->satus_id = null)
-                    Нет статуса
-                @else
-                    {{$user->userStatus->title}}
-                @endif
+                {{isset($user->userStatus) ?$user->userStatus->title : 'Нет статуса'}}
             </p>
 
             <hr>

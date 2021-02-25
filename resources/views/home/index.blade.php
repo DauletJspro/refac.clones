@@ -10,7 +10,7 @@
 @php($currentBalance = $data['currentBalance'])
 @php($dollar = \App\Models\Currency::dollarToKzt)
 @php($pvToKzt = \App\Models\Currency::pvToKzt)
-@php($user = \App\Models\User::find(\Illuminate\Support\Facades\Auth::user()->id))
+@php($user = \App\User::find(\Illuminate\Support\Facades\Auth::user()->id))
 @php($balance = $user->balance ?$user->balance->balance : 0)
 
 @section('content')
