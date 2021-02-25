@@ -13,10 +13,12 @@ class DeleteCategoryIdFromPackets extends Migration
      */
     public function up()
     {
-        Schema::table('packets', function (Blueprint $table) {
-            $table->dropForeign('packets_category_id_foreign');
-            $table->dropColumn('category_id');
-        });
+        if (Schema::hasColumn('packets','category_id')) {
+            Schema::table('packets', function (Blueprint $table) {
+                $table->dropForeign('packets_category_id_foreign');
+                $table->dropColumn('category_id');
+            });
+        }
     }
 
     /**
@@ -26,9 +28,6 @@ class DeleteCategoryIdFromPackets extends Migration
      */
     public function down()
     {
-        Schema::table('packets', function (Blueprint $table) {
-            $table->foreignId('category_id')
-            ->constrained('categories');
-        });
+
     }
 }
