@@ -9,6 +9,8 @@ class City extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'cities';
+
     public function region(){
         return $this->belongsTo(Region::class);
     }

@@ -9,6 +9,7 @@ class UserStatus extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'user_status';
     public function userStatus(){
         return $this->hasMany(User::class,'status_id');
     }

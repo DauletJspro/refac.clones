@@ -3,12 +3,16 @@
 namespace App;
 
 use App\Models\Comment;
+use App\Models\DocumentType;
 use App\Models\Favorites;
+use App\Models\Group;
 use App\Models\Guide;
 use App\Models\Like;
 use App\Models\News;
 use App\Models\Operation;
+use App\Models\Product;
 use App\Models\Review;
+use App\Models\UserBalance;
 use App\Models\UserInfo;
 use App\Models\UserStatus;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -34,6 +38,7 @@ class User extends Authenticatable
         'is_active',
         'activated_date',
         'inviter_id',
+        'iin'
     ];
 
     /**
@@ -54,10 +59,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $table = 'users';
+
     // Связи  для статуса клиента
     public function userStatus()
     {
-        return $this->belongsTo(UserStatus::class);
+        return $this->belongsTo(UserStatus::class, 'status_id', 'id');
     }
 
     public function userGapStatus()
@@ -65,7 +72,7 @@ class User extends Authenticatable
         return $this->belongsTo(UserStatus::class);
     }
 
-    //  Связи для дополнительный таьлицы для партнеров
+    //  Связи для дополнительный таблицы для партнеров
 
     public function info()
     {
@@ -91,6 +98,16 @@ class User extends Authenticatable
     public function recepientOperation()
     {
         return $this->belongsToMany(Operation::class, 'user_operation', 'recipient_id');
+    }
+
+    //  Связи для операции пользователи с документами
+
+    public function userGroup(){
+        return $this->belongsTo(Group::class,'user_groups');
+    }
+
+    public function document(){
+        return $this->belongsToMany(DocumentType::class,'user_document');
     }
 
     // Связи
@@ -125,19 +142,12 @@ class User extends Authenticatable
         return $this->hasMany(Guide::class);
     }
 
-    public static function getSpeakers()
-    {
-        return User::join('user_info', 'user_info.user_id', '=', 'users.id')
-            ->where(['user_info.is_speaker' => true])
-            ->get();
+    public function cash(){
+        return $this->hasOne(UserBalance::class);
     }
 
-    public static function getOfficeDirectors()
-    {
-        return User::join('user_info', 'user_info.user_id', '=', 'users.id')
-            ->where(['user_info.is_director_office' => true])
-            ->get();
+    public function product(){
+        return $this->belongsToMany(Product::class, 'user_baskets');
     }
-
 
 }

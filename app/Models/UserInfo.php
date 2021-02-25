@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserInfo extends Model
+class   UserInfo extends Model
 {
     use SoftDeletes;
 
@@ -29,7 +30,9 @@ class UserInfo extends Model
         'document_number',
         'address',
         'is_male',
-        'iban'
+        'iban',
+        'card_name',
+
     ];
 
     protected $hidden = [
@@ -57,5 +60,9 @@ class UserInfo extends Model
     public function userDirector()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function userGender(){
+        return $this->belongsTo(UserGender::class, 'is_male');
     }
 }
