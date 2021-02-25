@@ -12,6 +12,7 @@ class RegionSeed extends Seeder
      */
     public function run()
     {
+        DB::table('regions')->truncate();
         DB::table('regions')->insert([
             'id'      => 1,
             'name_kz' => 'Ақмола',
