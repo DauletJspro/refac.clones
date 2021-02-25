@@ -150,4 +150,18 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, 'user_baskets');
     }
 
+    public static function getSpeakers()
+    {
+        return User::join('user_info', 'user_info.user_id', '=', 'users.id')
+            ->where(['user_info.is_speaker' => true])
+            ->get();
+    }
+
+    public static function getOfficeDirectors()
+    {
+        return User::join('user_info', 'user_info.user_id', '=', 'users.id')
+            ->where(['user_info.is_director_office' => true])
+            ->get();
+    }
+
 }

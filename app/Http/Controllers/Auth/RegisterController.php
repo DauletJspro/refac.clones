@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\UserInfo;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,7 +46,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -53,21 +55,54 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'last_name' => ['required', 'min:2'],
+            'username' => ['required'],
+            'social_id' => ['required'],
+            'phone' => ['required'],
+            'inviter_id' => ['required'],
+            'sponsor_id' => []
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'username' => $data['username'],
+                'is_active' => $data['is_active'],
+                'activated_date' => date('Y-m-d H:i:s'),
+                'inviter_id' => $data['inviter_id'],
+            ]);
+
+            $userInfo = UserInfo::create([
+                'user_id' => $user->id,
+                'last_name' => $data['last_name'],
+                'speaker_id' => $data['speaker_id'],
+                'office_director_id' => $data['office_director_id'],
+                'is_speaker' => false,
+                'is_director_office' => false,
+                'office_id' => 1, ## TODO correct value
+                'social_id' => $data['social_id'],
+                'sponsor_id' => $data['sponsor_id']
+            ]);
+
+            $user->assignRole('client');
+            DB::commit();
+            return $user;
+        } catch (\Exception $exception) {
+            DB::rollback();
+            var_dump($exception->getLine() . ' ' . $exception->getMessage());
+        }
+
     }
 }
