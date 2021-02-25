@@ -11,4 +11,8 @@ class UserBalance extends Model
 
     protected $table = 'user_balance';
 
+    public function user(){
+        return $this->hasOne(User::class);
+    }
+
 }

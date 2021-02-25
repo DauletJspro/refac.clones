@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserStatus extends Model
 {
+    protected $table = 'user_status';
     use SoftDeletes;
 
     const CONSULTANT = 2;
