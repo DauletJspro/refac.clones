@@ -12,7 +12,6 @@ class CitiesSeed extends Seeder
      */
     public function run()
     {
-        DB::table('cities')->truncate();
         DB::table('cities')->insert([
             'name_kz' => 'Алматы',
             'name_ru' => 'Алматы',
