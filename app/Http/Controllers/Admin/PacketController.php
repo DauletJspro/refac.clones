@@ -12,7 +12,7 @@ class PacketController extends Controller
 {
     public function index(){
 
-        $packet = Packet::all();
-        return view('admin.packet-shop.packet-list',compact('packet'));
+        $packets = Packet::all();
+        return view('admin.packet-shop.packet-list',compact('packets'));
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PacketPurchaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,12 +31,14 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::resource('profile', 'ProfileController')->only([
         'index', 'edit', 'update'
     ]);
-        Route::get('/password/{profile}/edit', 'ProfileController@editPassword')
-            ->name('profile.password.edit');
-        Route::put('/password/{profile}', 'ProfileController@updatePassword')
-            ->name('profile.password.update');
+    Route::get('/password/{profile}/edit', 'ProfileController@editPassword')
+        ->name('profile.password.edit');
+    Route::put('/password/{profile}', 'ProfileController@updatePassword')
+        ->name('profile.password.update');
 
-    Route::resource('packet-shop', 'PacketController');
+    Route::resource('packet/shop', 'PacketController');
+
+    Route::post('packet/ajax', [PacketPurchaseController::class, 'ajax'])->name('packet.ajax');
 
 });
 
