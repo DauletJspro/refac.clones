@@ -17,9 +17,19 @@ class Packet extends Model
     const GAPAuto = 6;
     const GAPHome = 7;
 
-
     public function userStatus()
     {
         return $this->belongsTo(UserStatus::class);
     }
+
+    public function userPacket()
+    {
+        return $this->hasMany(UserPacket::class);
+    }
+
+    public function willBeImplemented($bonus_type)
+    {
+        var_dump($this->id);
+    }
+
 }
