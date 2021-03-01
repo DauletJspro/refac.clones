@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Operation extends Model
 {
     use SoftDeletes;
-
+   protected $table = 'operation';
     const WITHDRAWAL = 1;
     const ACCRUAL = 2;
 

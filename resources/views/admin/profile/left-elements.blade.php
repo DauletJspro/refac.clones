@@ -16,7 +16,13 @@
 
             <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                    <b>Баланс</b> <a class="float-right">10 $</a>
+                    <b>Баланс</b>
+                    @if(isset($user->cash->balance))
+                    <a class="float-right">{{$user->cash->balance}} $</a>
+                    @else
+                        <a class="float-right">0 $</a>
+                    @endif
+
                 </li>
                 <li class="list-group-item">
                     <b>Аккаунт</b> <a class="float-right">

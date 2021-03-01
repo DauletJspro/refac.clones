@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
         Route::put('/password/{profile}', 'ProfileController@updatePassword')
             ->name('profile.password.update');
 
+    Route::resource('packet-shop', 'PacketController');
 
 });
 
