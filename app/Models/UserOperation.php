@@ -21,19 +21,11 @@ class UserOperation extends Model
         return $this->belongsTo(OperationType::class);
     }
 
-    // For common record operation
-    public static function record($data )
+    public static function record(array $data)
     {
-//        $data['created_at'] = now();
-//        $data['updated_at'] = now();
-//        $operation = UserOperation::create($data);
-//
-//        if ($operation) {
-//            return true;
-//        }
-//        return false;
-
+        if (!empty($data)) {
+            self::create($data);
+        }
     }
-
 
 }
