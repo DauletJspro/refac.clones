@@ -17,6 +17,11 @@ class Packet extends Model
     const GAPAuto = 6;
     const GAPHome = 7;
 
+    const STANDARD_PACKETS = [self::CLASSIC, self::PREMIUM, self::VIP];
+    const GAP_PACKETS = [ self::GAPTechno, self::GAPAuto, self::GAPHome];
+
+
+
     public function userStatus()
     {
         return $this->belongsTo(UserStatus::class);

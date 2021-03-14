@@ -4,10 +4,15 @@
     <div class="card card-primary card-outline">
         <div class="card-body box-profile">
             <div class="text-center">
-                @if($user->info->is_male == 1)
-                    <a href="/admin/profile" style="color: #212529"> <i class="fas fa-male fa-10x"></i> </a>
-                @else
+
+
+
+                @if($user->info->is_male == 2)
                     <a href="/admin/profile" style="color: #212529"> <i class="fas fa-female fa-10x"></i> </a>
+                @elseif($user->info->is_male == 1)
+                    <a href="/admin/profile" style="color: #212529"> <i class="fas fa-male fa-10x"></i> </a>
+                @elseif(!isset($user->info->is_male))
+                    <a href="/admin/profile" style="color: #212529"> <i class="fas fa-male fa-10x"></i> </a>
                 @endif
             </div>
 

@@ -32,8 +32,8 @@
                                     <div class="row">
                                         <div class="col-sm-4 border-right">
                                             <div class="description-block">
-                                                <h5 class="description-header">3,200</h5>
-                                                <span class="description-text">SALES</span>
+                                                <h5 class="description-header">{{$packet->userPacket->count()}}</h5>
+                                                <span class="description-text">Продано</span>
                                             </div>
                                             <!-- /.description-block -->
                                         </div>
@@ -150,7 +150,10 @@
             $.ajax({
                 url: '{{ route('packet.ajax') }}',
                 type: "POST",
-                data: {type: type, packet_id: packet_id},
+                data: {
+                    type: type,
+                    packet_id: packet_id
+                },
                 success: function (data) {
 
                 }
